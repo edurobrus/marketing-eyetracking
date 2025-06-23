@@ -1,26 +1,29 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "Eye-Tracking for Marketing Campaigns",
-    "version": "16.0.1.0.0", # <-- CAMBIO PRINCIPAL: Adaptado para Odoo 16.
-    "summary": "Analyze marketing campaigns using webcam-based eye-tracking techniques.",
+    "name": "Eye-Tracking for Marketing & Research", # <-- CAMBIO: Nombre más completo
+    "version": "16.0.1.0.0",
+    "summary": "Analyze user attention with webcam eye-tracking to create heatmaps and optimize designs.",
+    
+    # La descripción ahora se tomará del index.html, pero es bueno dejar un resumen aquí.
     "description": """
-        This module allows recording and analyzing eye tracking data during marketing campaigns.
-        Additionally, it integrates a webcam functionality to capture live video.
-    """, # Se recomienda usar un archivo 'static/description/index.html' para una descripción más rica.
+        Integrates a webcam-based Eye-Tracking module into Odoo.
+        This tool allows marketing teams and researchers to analyze user attention on websites, ads, and other digital content.
+        It provides heatmaps, gaze plots, and session recordings, all processed locally in the browser to ensure user privacy.
+    """,
     
     "author": "Eduardo Robles Russo",
-    "website": "https://www.linkedin.com/in/eduardo-robles-russo-5133912b1/", # AÑADIDO: Tu sitio web o el del producto.
-    "support": "eduroblesrusso82@gmail.com", # AÑADIDO: Email de contacto para soporte.
+    "website": "https://www.linkedin.com/in/eduardo-robles-russo-5133912b1/", # <-- AÑADIDO: Tu GitHub es un buen sitio web.
+    "support": "eduroblesrusso82@gmail.com", # <-- AÑADIDO: Cambia esto por tu email.
     
-    "category": "Marketing",
-    "license": "LGPL-3", # AÑADIDO: ¡Esencial! La licencia es obligatoria.
+    "category": "Marketing/Website", # <-- CAMBIO: Categoría más específica.
+    "license": "LGPL-3", 
     
     "depends": ["base", "web"],
     
     "data": [
         "security/ir.model.access.csv",
         "views/analysis_views.xml",
-        # CAMBIO: Los templates XML/QWeb se declaran aquí, no en los assets.
+        # Templates QWeb
         "static/src/xml/eye_tracking_component.xml",
         "static/src/xml/web_dialog_client_action.xml",
         "static/src/xml/chart-graphics/chart/chart_renderer.xml",
@@ -28,13 +31,8 @@
     ],
     
     "assets": {
-        # CAMBIO: Los assets externos están prohibidos. Debes descargarlos e incluirlos localmente.
-        "web.assets_frontend": [
-            # Google Analytics - Debes descargar el script y guardarlo localmente.
-            "marketing_eyetracking/static/src/lib/gtag.js", 
-        ],
         "web.assets_backend": [
-            # Librerías (libs)
+            # Librerías
             "marketing_eyetracking/static/src/lib/bootstrap.bundle.min.js",
             "marketing_eyetracking/static/src/lib/d3.v3.min.js",
             "marketing_eyetracking/static/src/lib/localforage.js",
@@ -42,7 +40,7 @@
             "marketing_eyetracking/static/src/lib/sweetalert.min.js",
             "marketing_eyetracking/static/src/lib/html2canvas.min.js",
             
-            # Archivos JavaScript de tu aplicación (organizados)
+            # JS de la aplicación
             "marketing_eyetracking/static/src/js/calibration.js",
             "marketing_eyetracking/static/src/js/main.js",
             "marketing_eyetracking/static/src/js/precision_store_points.js",
@@ -50,19 +48,23 @@
             "marketing_eyetracking/static/src/js/resize_canvas.js",
             "marketing_eyetracking/static/src/js/eye_tracking_component.js",
             "marketing_eyetracking/static/src/js/web_dialog_client_action.js",
+            "marketing_eyetracking/static/src/js/google_analitics.js",
             "marketing_eyetracking/static/src/js/chart-graphics/chart/chart_renderer.js",
             "marketing_eyetracking/static/src/js/chart-graphics/greet_dashboard.js",
         ],
+        # No se recomienda añadir Google Analytics en frontend para módulos de backend.
+        # Si es para un sitio web, la clave correcta es 'website.assets_frontend'.
+        # Si no, es mejor eliminarlo o gestionarlo de otra forma para evitar rechazos.
     },
     
     "images": [
-        'static/description/icon.png', # AÑADIDO: Icono del módulo (obligatorio)
+        'static/description/icon.png',
+        'static/description/main_screenshot.png', 
     ],
     
-    "price": 0.0, # AÑADIDO: Precio del módulo. Poner 0.0 si es gratuito.
-    "currency": "EUR", # AÑADIDO: Moneda (EUR o USD).
+    "price": 0.0,
+    "currency": "EUR",
     
     "installable": True,
     "application": True,
-    "auto_install": False,
 }
