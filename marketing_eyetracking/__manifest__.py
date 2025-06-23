@@ -58,8 +58,8 @@
     },
     
     "images": [
-        'static/description/main_screenshot.png'
-        'static/description/icon.png',
+        'static/description/main_screenshot.png',
+        'static/description/icon.png'
     ],
     
     "price": 0.0,
