@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Eye-Tracking for Odoo</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -17,13 +17,21 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
+            background-color: #ffffff;
         }
 
         /* --- REGLA GENERAL PARA IMÁGENES RESPONSIVAS --- */
         img {
             max-width: 100%;
             height: auto;
-            display: block; /* Ayuda a un mejor manejo del layout */
+            display: block; 
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+        p:last-child {
+            margin-bottom: 0;
         }
         
         .container {
@@ -33,7 +41,8 @@
         }
         
         .section {
-            padding: 60px 0;
+            /* Margen aumentado para más espacio */
+            padding: 80px 0;
         }
         
         .section-dark {
@@ -48,20 +57,23 @@
         .main-title {
             color: #875A7B;
             font-weight: 900;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-size: 2.8rem;
+            margin-bottom: 25px;
         }
         
         .subtitle {
-            font-size: 1.25rem;
-            margin-bottom: 40px;
+            font-size: 1.3rem;
+            margin-bottom: 50px;
             color: #555;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .demo-image {
             border: 3px solid #ddd;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
@@ -75,42 +87,22 @@
         .problem-solution {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 40px 0;
+            /* Espacio y margen aumentados */
+            gap: 3rem;
+            margin: 60px 0;
         }
         
-        /* Dejamos las clases por si Odoo las usa parcialmente, pero los estilos importantes van en línea */
         .problem-box, .solution-box {
-            padding: 30px;
+            padding: 40px;
             border-radius: 8px;
             text-align: center;
         }
         
-        .problem-box {
-            background-color: #f9f9f9;
-            border-left: 4px solid #D5392D;
-        }
-        
-        .solution-box {
-            background-color: #A6C48A;
-            color: white;
-        }
-        
-        .problem-box h3 {
-            color: #D5392D;
-            margin-bottom: 15px;
-        }
-        
-        .solution-box h3 {
-            color: white;
-            margin-bottom: 15px;
-        }
-        
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
         }
         
         .feature-item {
@@ -118,19 +110,36 @@
             padding: 20px;
         }
         
-        .feature-item i {
+        /* --- ESTILOS PARA ICONOS PROFESIONALES --- */
+        .feature-icon {
+            height: 80px;
+            width: 80px;
+            margin: 0 auto 25px auto;
+            background-color: #875A7B;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 2.5rem;
-            color: #875A7B;
-            margin-bottom: 15px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .feature-item:hover .feature-icon {
+            transform: scale(1.1);
+            background-color: #6a455f;
         }
         
         .feature-item h4 {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-size: 1.25rem;
             color: #875A7B;
         }
         
         .workflow-step {
-            margin-bottom: 50px;
+            margin-bottom: 70px;
+        }
+        .workflow-step:last-child {
+            margin-bottom: 0;
         }
         
         .workflow-step h4 {
@@ -144,13 +153,14 @@
             max-width: 600px;
             margin: 20px auto 0 auto;
             border-radius: 8px;
-            border: 1px solid #ccc;
+            border: 1px solid #555;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         
         .technical-section {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 40px;
+            gap: 60px;
             align-items: start;
         }
         
@@ -169,14 +179,16 @@
         
         .contact-info {
             background-color: #f8f9fa;
-            padding: 20px;
+            padding: 25px;
             border-radius: 8px;
             margin-top: 20px;
+            border: 1px solid #eee;
         }
         
         .contact-info a {
             color: #875A7B;
             text-decoration: none;
+            font-weight: bold;
         }
         
         .contact-info a:hover {
@@ -186,64 +198,32 @@
         /* Mobile Styles */
         @media (max-width: 768px) {
             .section {
-                padding: 40px 0;
+                padding: 60px 0;
             }
-            
             .container {
                 padding: 0 15px;
             }
-            
             .main-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
-            
             .subtitle {
                 font-size: 1.1rem;
+                margin-bottom: 40px;
             }
-            
             .problem-solution {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .feature-item {
-                padding: 15px;
-            }
-            
             .technical-section {
                 grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .workflow-step h4 {
-                font-size: 1.25rem;
-            }
-            
-            .workflow-image {
-                max-width: 100%;
+                gap: 40px;
             }
         }
         
         @media (max-width: 480px) {
-            .main-title {
-                font-size: 1.75rem;
-            }
-            
-            .subtitle {
-                font-size: 1rem;
-            }
-            
             .problem-box, .solution-box {
-                padding: 20px; /* Es posible que Odoo ignore esta regla por el estilo en línea */
-            }
-            
-            .feature-item i {
-                font-size: 2rem;
+                 /* Es posible que Odoo ignore esta regla por el estilo en línea */
+                padding: 25px;
             }
         }
     </style>
@@ -255,7 +235,7 @@
         <h2 class="main-title">Eye-Tracking for Marketing & Research</h2>
         <h3 class="subtitle">See what your customers see. Turn user attention into actionable business insights directly within Odoo.</h3>
         <div class="demo-image">
-            <img src="8. dashboard.png" style="width: 100%; height: 100%;" alt="Eye-Tracking Dashboard in Odoo">
+            <img src="8. dashboard.png" style="width: 100%; height: 100%;"  alt="Eye-Tracking Dashboard in Odoo">
         </div>
     </div>
 </section>
@@ -263,12 +243,12 @@
 <section class="section">
     <div class="container">
         <div class="problem-solution">
-            <div class="problem-box" style="padding: 30px; border-radius: 8px; text-align: center; background-color: #f9f9f9; border-left: 4px solid #D5392D;">
-                <h3 style="color: #D5392D; margin-bottom: 15px;">The Problem: "Click Blindness"</h3>
+            <div class="problem-box" style="padding: 40px; border-radius: 8px; text-align: center; background-color: #f9f9f9; border-left: 4px solid #D5392D;">
+                <h3 style="color: #D5392D; margin-bottom: 15px; font-size: 1.4rem;">The Problem: "Click Blindness"</h3>
                 <p>Clicks and page views don't measure real user attention. Traditional analytics are disconnected from your core business data (sales, inventory, CRM) stored in your ERP.</p>
             </div>
-            <div class="solution-box" style="padding: 30px; border-radius: 8px; text-align: center; background-color: #A6C48A; color: white;">
-                <h3 style="color: white; margin-bottom: 15px;">The Solution: Integrated Eye-Tracking</h3>
+            <div class="solution-box" style="padding: 40px; border-radius: 8px; text-align: center; background-color: #A6C48A; color: white;">
+                <h3 style="color: white; margin-bottom: 15px; font-size: 1.4rem;">The Solution: Integrated Eye-Tracking</h3>
                 <p>Reveal what truly captures your users' gaze with webcam-based Eye-Tracking. By integrating this technology into Odoo, you centralize analysis and connect visual insights directly to business results.</p>
             </div>
         </div>
@@ -279,23 +259,35 @@
     <div class="container">
         <h2 class="main-title text-center">Key Features</h2>
         <div class="features-grid">
+            
             <div class="feature-item">
-                <i class="fa fa-camera"></i>
+                <div class="feature-icon">
+                    <i class="fa-solid fa-camera"></i>
+                </div>
                 <h4>Webcam-Based Tracking</h4>
                 <p>No expensive or special hardware required. Works with standard webcams.</p>
             </div>
+            
             <div class="feature-item">
-                <i class="fa fa-lock"></i>
+                <div class="feature-icon">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
                 <h4>Privacy-First Design</h4>
                 <p>All AI processing happens locally in the user's browser. No sensitive video data is sent to external servers.</p>
             </div>
+            
             <div class="feature-item">
-                <i class="fa fa-chart-area"></i>
+                <div class="feature-icon">
+                    <i class="fa-solid fa-chart-area"></i>
+                </div>
                 <h4>Rich Visualizations</h4>
                 <p>Generate insightful heatmaps, gaze plots, and get full session recordings to understand user behavior.</p>
             </div>
+            
             <div class="feature-item">
-                <i class="fa fa-cogs"></i>
+                <div class="feature-icon">
+                    <i class="fa-solid fa-cogs"></i>
+                </div>
                 <h4>Full Odoo Integration</h4>
                 <p>Manage, view, and analyze studies directly from your Odoo backend, just like any other business object.</p>
             </div>
@@ -310,19 +302,19 @@
         <div class="workflow-step">
             <h4>Step 1: Data Capture</h4>
             <p>Launch an analysis session. The user is guided through calibration and the recording begins.</p>
-            <img src="navigation_diagram1.png" style="width: 100%; height: 100%;" class="workflow-image" alt="Data Capture Flow">
+            <img src="navigation_diagram1.png" style="width: 100%; height: 100%;"  class="workflow-image" alt="Data Capture Flow">
         </div>
         
         <div class="workflow-step">
             <h4>Step 2: Data Management</h4>
             <p>All analyses are centrally stored and accessible from a standard Odoo list view.</p>
-            <img src="navigation_diagram2.png" style="width: 100%; height: 100%;" class="workflow-image" alt="Data Management Flow">
+            <img src="navigation_diagram2.png" style="width: 100%; height: 100%;"  class="workflow-image" alt="Data Management Flow">
         </div>
         
         <div class="workflow-step">
             <h4>Step 3: Visual Analysis</h4>
             <p>Explore the results in an interactive dashboard with heatmaps and dynamic charts.</p>
-            <img src="navigation_diagram3.png" style="width: 100%; height: 100%;" class="workflow-image" alt="Visual Analysis Flow">
+            <img src="navigation_diagram3.png" style="width: 100%; height: 100%;"  class="workflow-image" alt="Visual Analysis Flow">
         </div>
     </div>
 </section>
@@ -333,7 +325,7 @@
             <div class="technical-content">
                 <h3>Technical Architecture</h3>
                 <p>The module is built on Odoo's robust ORM and the OWL component library. It uses a single RPC endpoint to efficiently receive and store all session data in batch, ensuring minimal performance impact.</p>
-                <img src="er_diagram.png" style="width: 100%; height: 100%;" class="er-diagram" alt="ER Diagram">
+                <img src="er_diagram.png" style="width: 100%; height: 100%;"  class="er-diagram" alt="ER Diagram">
             </div>
             <div class="contact-content">
                 <h3>About the Author</h3>
