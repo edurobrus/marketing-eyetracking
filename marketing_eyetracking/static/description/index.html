@@ -277,27 +277,46 @@
 <section class="oe_container">
     <div class="oe_row oe_spaced">
         <h2 class="oe_slogan" style="color:#875A7B;">Key Features</h2>
-        <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
-            <div style="flex-basis: 45%; margin: 10px;">
-                <i class="fa fa-camera" style="font-size: 30px; color: #875A7B;"></i>
-                <h4>Webcam-Based Tracking</h4>
-                <p>No expensive or special hardware required. Works with standard webcams.</p>
+        
+        <!-- Contenedor principal que actúa como una fila y permite que las columnas se envuelvan -->
+        <div class="row"> 
+            
+            <!-- Columna 1 (ocupa 6 de 12 columnas en pantallas medianas y grandes) -->
+            <div class="col-md-6" style="margin-bottom: 20px;">
+                <div style="text-align: center;">
+                    <i class="fa fa-camera" style="font-size: 30px; color: #875A7B;"></i>
+                    <h4>Webcam-Based Tracking</h4>
+                    <p>No expensive or special hardware required. Works with standard webcams.</p>
+                </div>
             </div>
-            <div style="flex-basis: 45%; margin: 10px;">
-                <i class="fa fa-lock" style="font-size: 30px; color: #875A7B;"></i>
-                <h4>Privacy-First Design</h4>
-                <p>All AI processing happens locally in the user's browser. No sensitive video data is sent to external servers.</p>
+            
+            <!-- Columna 2 -->
+            <div class="col-md-6" style="margin-bottom: 20px;">
+                <div style="text-align: center;">
+                    <i class="fa fa-lock" style="font-size: 30px; color: #875A7B;"></i>
+                    <h4>Privacy-First Design</h4>
+                    <p>All AI processing happens locally in the user's browser. No sensitive video data is sent to external servers.</p>
+                </div>
             </div>
-            <div style="flex-basis: 45%; margin: 10px;">
-                <i class="fa fa-area-chart" style="font-size: 30px; color: #875A7B;"></i>
-                <h4>Rich Visualizations</h4>
-                <p>Generate insightful heatmaps, gaze plots, and get full session recordings to understand user behavior.</p>
+
+            <!-- Columna 3 -->
+            <div class="col-md-6" style="margin-bottom: 20px;">
+                <div style="text-align: center;">
+                    <i class="fa fa-area-chart" style="font-size: 30px; color: #875A7B;"></i>
+                    <h4>Rich Visualizations</h4>
+                    <p>Generate insightful heatmaps, gaze plots, and get full session recordings to understand user behavior.</p>
+                </div>
             </div>
-            <div style="flex-basis: 45%; margin: 10px;">
-                <i class="fa fa-cogs" style="font-size: 30px; color: #875A7B;"></i>
-                <h4>Full Odoo Integration</h4>
-                <p>Manage, view, and analyze studies directly from your Odoo backend, just like any other business object.</p>
+            
+            <!-- Columna 4 -->
+            <div class="col-md-6" style="margin-bottom: 20px;">
+                <div style="text-align: center;">
+                    <i class="fa fa-cogs" style="font-size: 30px; color: #875A7B;"></i>
+                    <h4>Full Odoo Integration</h4>
+                    <p>Manage, view, and analyze studies directly from your Odoo backend, just like any other business object.</p>
+                </div>
             </div>
+
         </div>
     </div>
 </section>
