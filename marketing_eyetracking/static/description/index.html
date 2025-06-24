@@ -5,57 +5,326 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Eye-Tracking for Odoo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .oe_container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+        
+        .oe_spaced {
+            margin-bottom: 40px;
+        }
+        
+        .oe_dark {
+            background-color: #2c3e50;
+            color: white;
+        }
+        
+        .oe_slogan {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        h2.oe_slogan {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #875A7B;
+            margin-bottom: 15px;
+        }
+        
+        h3.oe_slogan {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .oe_demo {
+            border: 3px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .oe_demo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Problem/Solution Section */
+        .problem-solution {
+            display: flex;
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .problem-box, .solution-box {
+            flex: 1;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .problem-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid #D5392D;
+        }
+        
+        .solution-box {
+            background-color: #A6C48A;
+            color: white;
+        }
+        
+        .problem-box h3 {
+            color: #D5392D;
+            margin-bottom: 15px;
+        }
+        
+        .solution-box h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+            background: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        
+        .feature-item i {
+            font-size: 2.5rem;
+            color: #875A7B;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .feature-item h4 {
+            color: #875A7B;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Workflow Steps */
+        .workflow-step {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .workflow-step h4 {
+            color: #fff;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+        
+        .workflow-step p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .workflow-step img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+        
+        /* Two Column Layout */
+        .two-column {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+        
+        .column-main {
+            flex: 2;
+        }
+        
+        .column-sidebar {
+            flex: 1;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+        }
+        
+        .author-photo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .author-photo img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+        
+        .column-sidebar h3 {
+            color: #875A7B;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .column-sidebar a {
+            color: #875A7B;
+            text-decoration: none;
+        }
+        
+        .column-sidebar a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Mobile Responsive Design */
+        @media (max-width: 768px) {
+            .oe_container {
+                padding: 15px 10px;
+            }
+            
+            h2.oe_slogan {
+                font-size: 1.8rem;
+            }
+            
+            h3.oe_slogan {
+                font-size: 1.1rem;
+            }
+            
+            .problem-solution {
+                flex-direction: column;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .feature-item {
+                padding: 15px;
+            }
+            
+            .feature-item i {
+                font-size: 2rem;
+            }
+            
+            .two-column {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .workflow-step img {
+                width: 100%;
+            }
+            
+            .workflow-step h4 {
+                font-size: 1.2rem;
+            }
+            
+            .workflow-step p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .oe_container {
+                padding: 10px 8px;
+            }
+            
+            h2.oe_slogan {
+                font-size: 1.5rem;
+            }
+            
+            h3.oe_slogan {
+                font-size: 1rem;
+            }
+            
+            .problem-box, .solution-box {
+                padding: 20px 15px;
+            }
+            
+            .feature-item {
+                padding: 12px;
+            }
+            
+            .column-sidebar {
+                padding: 20px 15px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<!-- Encabezado Principal -->
+<!-- Header Section -->
 <section class="oe_container" style="text-align: center;">
-    <div class="oe_row oe_spaced">
-        <h2 class="oe_slogan" style="color:#875A7B; font-weight: 900;">Eye-Tracking for Marketing & Research</h2>
-        <h3 class="oe_slogan" style="font-size: 20px;">See what your customers see. Turn user attention into actionable business insights directly within Odoo.</h3>
-        <div class="oe_demo oe_screenshot" style="border: 3px solid #ddd; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-            <!-- Usa tu imagen más impactante aquí -->
-            <img src="8. dashboard.png" style="width: 100%;" alt="Eye-Tracking Dashboard in Odoo">
+    <div class="oe_spaced">
+        <h2 class="oe_slogan">Eye-Tracking for Marketing & Research</h2>
+        <h3 class="oe_slogan">See what your customers see. Turn user attention into actionable business insights directly within Odoo.</h3>
+        <div class="oe_demo">
+            <img src="8. dashboard.png" alt="Eye-Tracking Dashboard in Odoo">
         </div>
     </div>
 </section>
 
-<!-- Problema y Solución -->
+<!-- Problem and Solution -->
 <section class="oe_container oe_spaced">
-    <div class="oe_row" style="display: flex; align-items: center; gap: 2em;">
-        <div style="flex: 1; text-align: center; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
-            <h3 style="color:#D5392D;">The Problem: "Click Blindness"</h3>
+    <div class="problem-solution">
+        <div class="problem-box">
+            <h3>The Problem: "Click Blindness"</h3>
             <p>Clicks and page views don't measure real user attention. Traditional analytics are disconnected from your core business data (sales, inventory, CRM) stored in your ERP.</p>
         </div>
-        <div style="flex: 1; text-align: center; background-color: #A6C48A; color: white; padding: 20px; border-radius: 8px;">
-            <h3 style="color:white;">The Solution: Integrated Eye-Tracking</h3>
+        <div class="solution-box">
+            <h3>The Solution: Integrated Eye-Tracking</h3>
             <p>Reveal what truly captures your users' gaze with webcam-based Eye-Tracking. By integrating this technology into Odoo, you centralize analysis and connect visual insights directly to business results.</p>
         </div>
     </div>
 </section>
 
-<!-- Características Clave -->
+<!-- Key Features -->
 <section class="oe_container">
-    <div class="oe_row oe_spaced">
-        <h2 class="oe_slogan" style="color:#875A7B;">Key Features</h2>
-        <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
-            <div style="flex-basis: 45%; margin: 10px;">
-                <i class="fa fa-camera" style="font-size: 30px; color: #875A7B;"></i>
+    <div class="oe_spaced">
+        <h2 class="oe_slogan">Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fas fa-camera"></i>
                 <h4>Webcam-Based Tracking</h4>
                 <p>No expensive or special hardware required. Works with standard webcams.</p>
             </div>
-            <div style="flex-basis: 45%; margin: 10px;">
-                <i class="fa fa-lock" style="font-size: 30px; color: #875A7B;"></i>
+            <div class="feature-item">
+                <i class="fas fa-lock"></i>
                 <h4>Privacy-First Design</h4>
                 <p>All AI processing happens locally in the user's browser. No sensitive video data is sent to external servers.</p>
             </div>
-            <div style="flex-basis: 45%; margin: 10px;">
-                <i class="fa fa-area-chart" style="font-size: 30px; color: #875A7B;"></i>
+            <div class="feature-item">
+                <i class="fas fa-chart-area"></i>
                 <h4>Rich Visualizations</h4>
                 <p>Generate insightful heatmaps, gaze plots, and get full session recordings to understand user behavior.</p>
             </div>
-            <div style="flex-basis: 45%; margin: 10px;">
-                <i class="fa fa-cogs" style="font-size: 30px; color: #875A7B;"></i>
+            <div class="feature-item">
+                <i class="fas fa-cogs"></i>
                 <h4>Full Odoo Integration</h4>
                 <p>Manage, view, and analyze studies directly from your Odoo backend, just like any other business object.</p>
             </div>
@@ -63,52 +332,59 @@
     </div>
 </section>
 
-<!-- Flujo de Usuario -->
+<!-- User Workflow -->
 <section class="oe_container oe_dark">
-    <div class="oe_row oe_spaced">
+    <div class="oe_spaced">
         <h2 class="oe_slogan" style="color:#FFFFFF;">User Workflow: From Setup to Insight</h2>
-        <div class="oe_span12" style="text-align: center;">
+        
+        <div class="workflow-step">
             <h4>Step 1: Data Capture</h4>
             <p>Launch an analysis session. The user is guided through calibration and the recording begins.</p>
-            <img src="navigation_diagram1.png" style="width:80%; margin-top:16px; border-radius: 8px; border: 1px solid #ccc;" alt="Data Capture Flow">
+            <img src="navigation_diagram1.png" alt="Data Capture Flow">
         </div>
-        <div class="oe_span12" style="text-align: center; margin-top: 32px;">
+        
+        <div class="workflow-step">
             <h4>Step 2: Data Management</h4>
             <p>All analyses are centrally stored and accessible from a standard Odoo list view.</p>
-            <img src="navigation_diagram2.png" style="width:70%; margin-top:16px; border-radius: 8px; border: 1px solid #ccc;" alt="Data Management Flow">
+            <img src="navigation_diagram2.png" alt="Data Management Flow">
         </div>
-        <div class="oe_span12" style="text-align: center; margin-top: 32px;">
+        
+        <div class="workflow-step">
             <h4>Step 3: Visual Analysis</h4>
             <p>Explore the results in an interactive dashboard with heatmaps and dynamic charts.</p>
-            <img src="navigation_diagram3.png" style="width:90%; margin-top:16px; border-radius: 8px; border: 1px solid #ccc;" alt="Visual Analysis Flow">
+            <img src="navigation_diagram3.png" alt="Visual Analysis Flow">
         </div>
     </div>
 </section>
 
-<!-- Detalles Técnicos y Contacto -->
+<!-- Technical Details and Contact -->
 <section class="oe_container">
-    <div class="oe_row oe_spaced">
-        <div class="oe_span8">
-            <h3 style="color:#875A7B;">Technical Architecture</h3>
-            <p>The module is built on Odoo's robust ORM and the OWL component library. It uses a single RPC endpoint to efficiently receive and store all session data in batch, ensuring minimal performance impact.</p>
-            <img src="er_diagram.png" style="width: 100%; margin-top:16px; border: 1px solid #ddd;" alt="ER Diagram">
-        </div>
-        <div class="oe_span4">
-            <div class="oe_photo">
-                <!-- Tu icono -->
-                <img src="icon.png" style="width: 100px; height: 100px;" alt="Module Icon">
+    <div class="oe_spaced">
+        <div class="two-column">
+            <div class="column-main">
+                <h3 style="color:#875A7B;">Technical Architecture</h3>
+                <p>The module is built on Odoo's robust ORM and the OWL component library. It uses a single RPC endpoint to efficiently receive and store all session data in batch, ensuring minimal performance impact.</p>
+                <img src="er_diagram.png" style="width: 100%; margin-top:16px; border: 1px solid #ddd; border-radius: 8px;" alt="ER Diagram">
             </div>
-            <h3 style="color:#875A7B;">About the Author</h3>
-            <p>
-                <b>Eduardo Robles Russo</b><br/>
-                This module was developed as part of a research project at the University of Seville (ETSII).
-            </p>
-            <h3 style="color:#875A7B;">Support & Contact</h3>
-            <p>
-                For questions or support, please contact:<br/>
-                <a href="mailto:tu.email.de.soporte@example.com">tu.email.de.soporte@example.com</a><br/>
-                Or visit the project repository on <a href="https://github.com/edurobrus/marketing-eyetracking" target="_blank">GitHub</a>.
-            </p>
+            
+            <div class="column-sidebar">
+                <div class="author-photo">
+                    <img src="icon.png" alt="Module Icon">
+                </div>
+                
+                <h3>About the Author</h3>
+                <p>
+                    <strong>Eduardo Robles Russo</strong><br/>
+                    This module was developed as part of a research project at the University of Seville (ETSII).
+                </p>
+                
+                <h3>Support & Contact</h3>
+                <p>
+                    For questions or support, please contact:<br/>
+                    <a href="mailto:tu.email.de.soporte@example.com">tu.email.de.soporte@example.com</a><br/>
+                    Or visit the project repository on <a href="https://github.com/edurobrus/marketing-eyetracking" target="_blank">GitHub</a>.
+                </p>
+            </div>
         </div>
     </div>
 </section>
