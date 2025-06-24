@@ -5,57 +5,294 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Eye-Tracking for Odoo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-dark {
+            background-color: #2c3e50;
+            color: white;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .main-title {
+            color: #875A7B;
+            font-weight: 900;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            color: #555;
+        }
+        
+        .demo-image {
+            border: 3px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .demo-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 7px;
+        }
+        
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 40px 0;
+        }
+        
+        .problem-box, .solution-box {
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .problem-box {
+            background-color: #f9f9f9;
+            border-left: 4px solid #D5392D;
+        }
+        
+        .solution-box {
+            background-color: #A6C48A;
+            color: white;
+        }
+        
+        .problem-box h3 {
+            color: #D5392D;
+            margin-bottom: 15px;
+        }
+        
+        .solution-box h3 {
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .feature-item i {
+            font-size: 2.5rem;
+            color: #875A7B;
+            margin-bottom: 15px;
+        }
+        
+        .feature-item h4 {
+            margin-bottom: 10px;
+            color: #875A7B;
+        }
+        
+        .workflow-step {
+            margin-bottom: 50px;
+        }
+        
+        .workflow-step h4 {
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .workflow-image {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto 0 auto;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            display: block;
+        }
+        
+        .technical-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        .technical-content h3, .contact-content h3 {
+            color: #875A7B;
+            margin-bottom: 15px;
+        }
+        
+        .er-diagram {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        .contact-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .contact-info a {
+            color: #875A7B;
+            text-decoration: none;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            .section {
+                padding: 40px 0;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .problem-solution {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .feature-item {
+                padding: 15px;
+            }
+            
+            .technical-section {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .workflow-step h4 {
+                font-size: 1.25rem;
+            }
+            
+            .workflow-image {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.75rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .problem-box, .solution-box {
+                padding: 20px;
+            }
+            
+            .feature-item i {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <!-- Encabezado Principal -->
-<section class="oe_container" style="text-align: center;">
-    <div class="oe_row oe_spaced">
-        <h2 class="oe_slogan" style="color:#875A7B; font-weight: 900;">Eye-Tracking for Marketing & Research</h2>
-        <h3 class="oe_slogan" style="font-size: 20px;">See what your customers see. Turn user attention into actionable business insights directly within Odoo.</h3>
-        <div class="oe_demo oe_screenshot" style="border: 3px solid #ddd; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-            <!-- Usa tu imagen más impactante aquí -->
-            <img src="8. dashboard.png" style="width: 100%;" alt="Eye-Tracking Dashboard in Odoo">
+<section class="section">
+    <div class="container text-center">
+        <h2 class="main-title">Eye-Tracking for Marketing & Research</h2>
+        <h3 class="subtitle">See what your customers see. Turn user attention into actionable business insights directly within Odoo.</h3>
+        <div class="demo-image">
+            <img src="8. dashboard.png" alt="Eye-Tracking Dashboard in Odoo">
         </div>
     </div>
 </section>
 
 <!-- Problema y Solución -->
-<section class="oe_container oe_spaced">
-    <div class="oe_row" style="display: flex; align-items: center; gap: 2em;">
-        <div style="flex: 1; text-align: center; background-color: #f9f9f9; padding: 20px; border-radius: 8px;">
-            <h3 style="color:#D5392D;">The Problem: "Click Blindness"</h3>
-            <p>Clicks and page views don't measure real user attention. Traditional analytics are disconnected from your core business data (sales, inventory, CRM) stored in your ERP.</p>
-        </div>
-        <div style="flex: 1; text-align: center; background-color: #A6C48A; color: white; padding: 20px; border-radius: 8px;">
-            <h3 style="color:white;">The Solution: Integrated Eye-Tracking</h3>
-            <p>Reveal what truly captures your users' gaze with webcam-based Eye-Tracking. By integrating this technology into Odoo, you centralize analysis and connect visual insights directly to business results.</p>
+<section class="section">
+    <div class="container">
+        <div class="problem-solution">
+            <div class="problem-box">
+                <h3>The Problem: "Click Blindness"</h3>
+                <p>Clicks and page views don't measure real user attention. Traditional analytics are disconnected from your core business data (sales, inventory, CRM) stored in your ERP.</p>
+            </div>
+            <div class="solution-box">
+                <h3>The Solution: Integrated Eye-Tracking</h3>
+                <p>Reveal what truly captures your users' gaze with webcam-based Eye-Tracking. By integrating this technology into Odoo, you centralize analysis and connect visual insights directly to business results.</p>
+            </div>
         </div>
     </div>
 </section>
 
 <!-- Características Clave -->
-<section class="oe_container">
-    <div class="oe_row oe_spaced">
-        <h2 class="oe_slogan" style="color:#875A7B;">Key Features</h2>
-        <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
-            <div style="flex-basis: 45%; margin: 10px;">
-                <i class="fa fa-camera" style="font-size: 30px; color: #875A7B;"></i>
+<section class="section">
+    <div class="container">
+        <h2 class="main-title text-center">Key Features</h2>
+        <div class="features-grid">
+            <div class="feature-item">
+                <i class="fa fa-camera"></i>
                 <h4>Webcam-Based Tracking</h4>
                 <p>No expensive or special hardware required. Works with standard webcams.</p>
             </div>
-            <div style="flex-basis: 45%; margin: 10px;">
-                <i class="fa fa-lock" style="font-size: 30px; color: #875A7B;"></i>
+            <div class="feature-item">
+                <i class="fa fa-lock"></i>
                 <h4>Privacy-First Design</h4>
                 <p>All AI processing happens locally in the user's browser. No sensitive video data is sent to external servers.</p>
             </div>
-            <div style="flex-basis: 45%; margin: 10px;">
-                <i class="fa fa-area-chart" style="font-size: 30px; color: #875A7B;"></i>
+            <div class="feature-item">
+                <i class="fa fa-chart-area"></i>
                 <h4>Rich Visualizations</h4>
                 <p>Generate insightful heatmaps, gaze plots, and get full session recordings to understand user behavior.</p>
             </div>
-            <div style="flex-basis: 45%; margin: 10px;">
-                <i class="fa fa-cogs" style="font-size: 30px; color: #875A7B;"></i>
+            <div class="feature-item">
+                <i class="fa fa-cogs"></i>
                 <h4>Full Odoo Integration</h4>
                 <p>Manage, view, and analyze studies directly from your Odoo backend, just like any other business object.</p>
             </div>
@@ -64,47 +301,51 @@
 </section>
 
 <!-- Flujo de Usuario -->
-<section class="oe_container oe_dark">
-    <div class="oe_row oe_spaced">
-        <h2 class="oe_slogan" style="color:#FFFFFF;">User Workflow: From Setup to Insight</h2>
-        <div class="oe_span12" style="text-align: center;">
+<section class="section section-dark">
+    <div class="container text-center">
+        <h2 class="main-title" style="color: #ffffff;">User Workflow: From Setup to Insight</h2>
+        
+        <div class="workflow-step">
             <h4>Step 1: Data Capture</h4>
             <p>Launch an analysis session. The user is guided through calibration and the recording begins.</p>
-            <img src="navigation_diagram1.png" style="width:80%; height:80%; margin-top:16px; border-radius: 8px; border: 1px solid #ccc;" alt="Data Capture Flow">
+            <img src="navigation_diagram1.png" class="workflow-image" alt="Data Capture Flow">
         </div>
-        <div class="oe_span12" style="text-align: center; margin-top: 32px;">
+        
+        <div class="workflow-step">
             <h4>Step 2: Data Management</h4>
             <p>All analyses are centrally stored and accessible from a standard Odoo list view.</p>
-            <img src="navigation_diagram2.png" style="width:70%; height:70%; margin-top:16px; border-radius: 8px; border: 1px solid #ccc;" alt="Data Management Flow">
+            <img src="navigation_diagram2.png" class="workflow-image" alt="Data Management Flow">
         </div>
-        <div class="oe_span12" style="text-align: center; margin-top: 32px;">
+        
+        <div class="workflow-step">
             <h4>Step 3: Visual Analysis</h4>
             <p>Explore the results in an interactive dashboard with heatmaps and dynamic charts.</p>
-            <img src="navigation_diagram3.png" style="width:90%; height: 90%; margin-top:16px; border-radius: 8px; border: 1px solid #ccc;" alt="Visual Analysis Flow">
+            <img src="navigation_diagram3.png" class="workflow-image" alt="Visual Analysis Flow">
         </div>
     </div>
 </section>
 
 <!-- Detalles Técnicos y Contacto -->
-<section class="oe_container">
-    <div class="oe_row oe_spaced">
-        <div class="oe_span8">
-            <h3 style="color:#875A7B;">Technical Architecture</h3>
-            <p>The module is built on Odoo's robust ORM and the OWL component library. It uses a single RPC endpoint to efficiently receive and store all session data in batch, ensuring minimal performance impact.</p>
-            <img src="er_diagram.png" style="width: 90%; height: 90%; margin:16px; border: 1px solid #ddd;" alt="ER Diagram">
-        </div>
-        <div class="oe_span4">
-            <h3 style="color:#875A7B;">About the Author</h3>
-            <p>
-                <b>Eduardo Robles Russo</b><br/>
-                This module was developed as part of a research project at the University of Seville (ETSII).
-            </p>
-            <h3 style="color:#875A7B;">Support & Contact</h3>
-            <p>
-                For questions or support, please contact:<br/>
-                <a href="mailto:tu.email.de.soporte@example.com">tu.email.de.soporte@example.com</a><br/>
-                Or visit the project repository on <a href="https://github.com/edurobrus/marketing-eyetracking" target="_blank">GitHub</a>.
-            </p>
+<section class="section">
+    <div class="container">
+        <div class="technical-section">
+            <div class="technical-content">
+                <h3>Technical Architecture</h3>
+                <p>The module is built on Odoo's robust ORM and the OWL component library. It uses a single RPC endpoint to efficiently receive and store all session data in batch, ensuring minimal performance impact.</p>
+                <img src="er_diagram.png" class="er-diagram" alt="ER Diagram">
+            </div>
+            <div class="contact-content">
+                <h3>About the Author</h3>
+                <p><strong>Eduardo Robles Russo</strong><br/>
+                This module was developed as part of a research project at the University of Seville (ETSII).</p>
+                
+                <div class="contact-info">
+                    <h3>Support & Contact</h3>
+                    <p>For questions or support, please contact:<br/>
+                    <a href="mailto:tu.email.de.soporte@example.com">tu.email.de.soporte@example.com</a><br/>
+                    Or visit the project repository on <a href="https://github.com/edurobrus/marketing-eyetracking" target="_blank">GitHub</a>.</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
